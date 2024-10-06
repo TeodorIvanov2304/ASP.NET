@@ -7,15 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApp.Web", "CinemaApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApp.Web.ViewModels", "CinemaApp.Web.ViewModels\CinemaApp.Web.ViewModels.csproj", "{7E63838D-0B4A-423C-A801-6C65124174D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApp.Common", "CinemaApp.Common\CinemaApp.Common.csproj", "{2E54CB71-07FA-419E-9F77-FA02B1A30C81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApp.Common", "CinemaApp.Common\CinemaApp.Common.csproj", "{2E54CB71-07FA-419E-9F77-FA02B1A30C81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApp.Data.Models", "CinemaApp.Data.Models\CinemaApp.Data.Models.csproj", "{7F6ED59B-74A7-443F-872C-48075353118D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApp.Data.Models", "CinemaApp.Data.Models\CinemaApp.Data.Models.csproj", "{7F6ED59B-74A7-443F-872C-48075353118D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{EE389FBE-C69E-4F71-9E87-ECBD35089E66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F7107BD6-AD0F-47A7-9F21-539542D85AF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApp.Data", "CinemaApp.Data\CinemaApp.Data.csproj", "{6F2A08D2-A35A-450D-ACBB-0C1448C0F229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaApp.Data", "CinemaApp.Data\CinemaApp.Data.csproj", "{6F2A08D2-A35A-450D-ACBB-0C1448C0F229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApp.Web.Infrastructure", "CinemaApp.Web.Infrastructure\CinemaApp.Web.Infrastructure.csproj", "{0A4ECBAB-8E53-4B28-9141-41B5EE39F911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{6F2A08D2-A35A-450D-ACBB-0C1448C0F229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F2A08D2-A35A-450D-ACBB-0C1448C0F229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F2A08D2-A35A-450D-ACBB-0C1448C0F229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A4ECBAB-8E53-4B28-9141-41B5EE39F911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4ECBAB-8E53-4B28-9141-41B5EE39F911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4ECBAB-8E53-4B28-9141-41B5EE39F911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4ECBAB-8E53-4B28-9141-41B5EE39F911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{7E63838D-0B4A-423C-A801-6C65124174D5} = {EE389FBE-C69E-4F71-9E87-ECBD35089E66}
 		{7F6ED59B-74A7-443F-872C-48075353118D} = {F7107BD6-AD0F-47A7-9F21-539542D85AF9}
 		{6F2A08D2-A35A-450D-ACBB-0C1448C0F229} = {F7107BD6-AD0F-47A7-9F21-539542D85AF9}
+		{0A4ECBAB-8E53-4B28-9141-41B5EE39F911} = {EE389FBE-C69E-4F71-9E87-ECBD35089E66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {576DC260-00E1-4CA9-87B9-06D3EB1D4031}

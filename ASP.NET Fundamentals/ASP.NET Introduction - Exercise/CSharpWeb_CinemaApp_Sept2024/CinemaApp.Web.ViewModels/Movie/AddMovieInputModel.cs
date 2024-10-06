@@ -1,28 +1,35 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static CinemaApp.Common.EntityValidationConstants.Movie;
+using static CinemaApp.Common.EntityValidationMessages.Movie;
+
 
 namespace CinemaApp.Web.ViewModels.Movie
 {
 	public class AddMovieInputModel
 	{
-		[Required]
+        public AddMovieInputModel()
+        {
+			this.ReleaseDate = DateTime.UtcNow.ToString(ReleaseDateFormat);
+        }
+
+        [Required(ErrorMessage = TitleRequiredMessage)]
 		[MinLength(TitleMinLength)]
 		[MaxLength(TitleMaxLength)]
 		public string Title { get; set; } = null!;
 
-		[Required]
+		[Required(ErrorMessage = GenreRequiredMessage)]
 		[MinLength(GenreMinLength)]
 		[MaxLength(GenreMaxLength)]
 		public string Genre { get; set; } = null!;
 
-		[Required]
-		public string ReleaseDate { get; set; } = null!;
+		[Required(ErrorMessage = ReleaseDateRequiredMessage)]
+		public string ReleaseDate { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = DurationRequiredMessage)]
 		[Range(DurationMinValue, DurationMaxValue)]
         public int Duration { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = DirectorRequiredMessage)]
 		[MinLength(DirectorNameMinLength)]
 		[MaxLength(DirectorNameMaxLength)]
 		public string Director { get; set; } = null!;

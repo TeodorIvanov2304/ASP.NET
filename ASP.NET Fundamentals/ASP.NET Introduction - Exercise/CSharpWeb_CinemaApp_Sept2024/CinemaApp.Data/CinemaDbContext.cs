@@ -17,6 +17,11 @@ namespace CinemaApp.Data
 		}
 
 		public virtual DbSet<Movie> Movies { get; set; } = null!;
+		public virtual DbSet<Cinema> Cinemas { get; set; } = null!;
+		public virtual DbSet<CinemaMovie> CinemasMovies { get; set; } = null!;
+
+
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

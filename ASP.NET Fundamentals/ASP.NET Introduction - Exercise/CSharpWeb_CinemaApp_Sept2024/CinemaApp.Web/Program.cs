@@ -1,5 +1,6 @@
 using CinemaApp.Data;
 using Microsoft.EntityFrameworkCore;
+using static CinemaApp.Web.Infrastructure.Extensions.ApplicationBuilderExtensions;
 
 namespace CinemaApp.Web
 {
@@ -8,18 +9,18 @@ namespace CinemaApp.Web
 		public static void Main(string[] args)
 		{
 			WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
+			string connectionString = builder.Configuration.GetConnectionString("SQLServer")!;
 
 			// Add services to the container.
 
 			//Enable using Dependency injection on DbContext
 			builder.Services.AddDbContext<CinemaDbContext>(options =>
-					 options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"))
-);
+					 options.UseSqlServer(connectionString));
 
 			builder.Services.AddControllersWithViews();
 
 			WebApplication app = builder.Build();
+
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
@@ -39,6 +40,8 @@ namespace CinemaApp.Web
 			app.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}");
+
+			app.ApplyMigrations();
 
 			app.Run();
 		}

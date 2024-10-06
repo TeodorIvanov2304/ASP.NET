@@ -14,6 +14,15 @@
 			public const int DirectorNameMaxLength = 80;
 			public const int DescriptionNameMinLength = 50;
 			public const int DescriptionNameMaxLength = 500;
+			public const string ReleaseDateFormat = "MMMM yyyy";
+		}
+
+		public static class Cinema
+		{
+			public const int NameMinLength = 3;
+			public const int NameMaxLength = 50;
+			public const int LocationMinLength = 3;
+			public const int LocationMaxLength = 85;
 		}
 	}
 }
