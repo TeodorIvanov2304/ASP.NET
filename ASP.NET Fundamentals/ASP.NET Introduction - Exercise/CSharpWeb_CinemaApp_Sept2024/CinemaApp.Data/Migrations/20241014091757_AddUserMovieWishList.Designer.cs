@@ -4,6 +4,7 @@ using CinemaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Data.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241014091757_AddUserMovieWishList")]
+    partial class AddUserMovieWishList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,7 @@ namespace CinemaApp.Data.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("UserMovies");
+                    b.ToTable("ApplicationUserMovie");
                 });
 
             modelBuilder.Entity("CinemaApp.Data.Models.Cinema", b =>
@@ -126,19 +129,19 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a6e282b3-f06e-4076-98aa-b6340af60d83"),
+                            Id = new Guid("bb5ae003-3b0d-4330-a84c-f0d194ca0a81"),
                             Location = "Sofia",
                             Name = "Cinema city"
                         },
                         new
                         {
-                            Id = new Guid("9e186d46-26a8-46f6-b048-066c0bf4c68f"),
+                            Id = new Guid("fc4e81c7-536d-4cd1-9a5a-a40b2b612732"),
                             Location = "Plovdiv",
                             Name = "Cinema city"
                         },
                         new
                         {
-                            Id = new Guid("dc08b440-fbbe-449e-954c-7b0e0bbb08ff"),
+                            Id = new Guid("8e146fab-8d99-430a-ba2e-e26dd04d9b52"),
                             Location = "Varna",
                             Name = "Cinemax"
                         });
@@ -188,12 +191,6 @@ namespace CinemaApp.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("ImageUrl")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(2083)
-                        .HasColumnType("nvarchar(2083)")
-                        .HasDefaultValue("~/images/no-image");
-
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
@@ -209,7 +206,7 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0a6a64cb-2847-47f0-a306-4923021fcc52"),
+                            Id = new Guid("129badf7-3217-4af2-b063-7c04d1f10afd"),
                             Description = "In his fourth year at Hogwarts, Harry must reluctantly compete in an ancient wizard tournament after someone mysteriously selects his name, while the Dark Lord secretly conspires something sinister.",
                             Director = "Mike Newel",
                             Duration = 157,
@@ -219,7 +216,7 @@ namespace CinemaApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b0aa45d9-07a4-4875-987e-85583b6b38e9"),
+                            Id = new Guid("d6262044-648d-427f-b9fd-686eb4e7c267"),
                             Description = "Among motion pictures of Middle-earth in various formats, The Lord of the Rings is a trilogy of epic fantasy adventure films directed by Peter Jackson, based on the novel The Lord of the Rings by British author J. R. R. Tolkien.",
                             Director = "Peter Jackson",
                             Duration = 178,
@@ -369,7 +366,7 @@ namespace CinemaApp.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CinemaApp.Data.Models.Movie", "Movie")
-                        .WithMany("MovieApplicationUsers")
+                        .WithMany("MovieApplicationUser")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -461,7 +458,7 @@ namespace CinemaApp.Data.Migrations
 
             modelBuilder.Entity("CinemaApp.Data.Models.Movie", b =>
                 {
-                    b.Navigation("MovieApplicationUsers");
+                    b.Navigation("MovieApplicationUser");
 
                     b.Navigation("MoviesCinema");
                 });

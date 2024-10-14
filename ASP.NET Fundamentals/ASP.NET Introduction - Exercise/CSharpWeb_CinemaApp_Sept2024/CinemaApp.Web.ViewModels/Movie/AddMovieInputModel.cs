@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 using static CinemaApp.Common.EntityValidationConstants.Movie;
 using static CinemaApp.Common.EntityValidationMessages.Movie;
 
@@ -38,5 +39,8 @@ namespace CinemaApp.Web.ViewModels.Movie
 		[MinLength(DescriptionNameMinLength)]
 		[MaxLength(DescriptionNameMaxLength)]
 		public string Description { get; set; } = null!;
+
+		[MaxLength(ImageUrlMaxLength)]
+		public string? ImageUrl { get; set; }
     }
 }

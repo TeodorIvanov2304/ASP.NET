@@ -1,4 +1,7 @@
 using CinemaApp.Data;
+using CinemaApp.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using static CinemaApp.Web.Infrastructure.Extensions.ApplicationBuilderExtensions;
 
@@ -6,7 +9,7 @@ namespace CinemaApp.Web
 {
 	public class Program
 	{
-		public static void Main(string[] args)
+		public static async Task Main(string[] args)
 		{
 			WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 			string connectionString = builder.Configuration.GetConnectionString("SQLServer")!;
@@ -17,7 +20,26 @@ namespace CinemaApp.Web
 			builder.Services.AddDbContext<CinemaDbContext>(options =>
 					 options.UseSqlServer(connectionString));
 
+
+			builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(configuration =>
+				{
+					ConfigureIdentity(builder,configuration);
+				})
+				.AddEntityFrameworkStores<CinemaDbContext>()
+				.AddRoles<IdentityRole<Guid>>()
+				.AddSignInManager<SignInManager<ApplicationUser>>()
+				.AddUserManager<UserManager<ApplicationUser>>();
+
+			builder.Services.ConfigureApplicationCookie(cfg =>
+			{
+				cfg.LoginPath = "/Identity/Account/Login";
+			});
+
 			builder.Services.AddControllersWithViews();
+			
+			builder.Services.AddRazorPages();
+				
+				
 
 			WebApplication app = builder.Build();
 
@@ -31,9 +53,12 @@ namespace CinemaApp.Web
 			}
 
 			app.UseHttpsRedirection();
+
 			app.UseStaticFiles();
 
 			app.UseRouting();
+
+			app.UseAuthentication();
 
 			app.UseAuthorization();
 
@@ -41,9 +66,33 @@ namespace CinemaApp.Web
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}");
 
-			app.ApplyMigrations();
+			app.MapRazorPages();
+
+			await app.ApplyMigrations();
+
 
 			app.Run();
+		}
+
+		//Get the password properties from user secrets
+		private static void ConfigureIdentity(WebApplicationBuilder builder, IdentityOptions configuration)
+		{
+
+			//Password
+			configuration.Password.RequireDigit = builder.Configuration.GetValue<bool>("Identity:Password:RequireDigits");
+			configuration.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+			configuration.Password.RequireUppercase = builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
+			configuration.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumerical");
+			configuration.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
+			configuration.Password.RequiredUniqueChars = builder.Configuration.GetValue<int>("Identity:Password:RequiredUniqueCharacters");
+
+			//Sign in
+			configuration.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("Identity:SingIn:RequireConfirmedAccount");
+			configuration.SignIn.RequireConfirmedEmail = builder.Configuration.GetValue<bool>("Identity:SingIn:RequireConfirmedEmail");
+			configuration.SignIn.RequireConfirmedPhoneNumber = builder.Configuration.GetValue<bool>("Identity:SingIn:RequireConfirmedPhoneNumber");
+
+			//User
+			configuration.User.RequireUniqueEmail = builder.Configuration.GetValue<bool>("Identity:SingIn:RequireUniqueEmail");
 		}
 	}
 }

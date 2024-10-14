@@ -4,6 +4,7 @@ using CinemaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Data.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012160518_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,21 +91,6 @@ namespace CinemaApp.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("CinemaApp.Data.Models.ApplicationUserMovie", b =>
-                {
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MovieId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ApplicationUserId", "MovieId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("UserMovies");
-                });
-
             modelBuilder.Entity("CinemaApp.Data.Models.Cinema", b =>
                 {
                     b.Property<Guid>("Id")
@@ -126,19 +114,19 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a6e282b3-f06e-4076-98aa-b6340af60d83"),
+                            Id = new Guid("77040d1f-526d-44da-a281-0a2d2f0216a8"),
                             Location = "Sofia",
                             Name = "Cinema city"
                         },
                         new
                         {
-                            Id = new Guid("9e186d46-26a8-46f6-b048-066c0bf4c68f"),
+                            Id = new Guid("a5c83db7-d73c-43b6-b963-bca9042f338e"),
                             Location = "Plovdiv",
                             Name = "Cinema city"
                         },
                         new
                         {
-                            Id = new Guid("dc08b440-fbbe-449e-954c-7b0e0bbb08ff"),
+                            Id = new Guid("71f26f55-55a1-447c-a3eb-90f9257d417c"),
                             Location = "Varna",
                             Name = "Cinemax"
                         });
@@ -188,12 +176,6 @@ namespace CinemaApp.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("ImageUrl")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(2083)
-                        .HasColumnType("nvarchar(2083)")
-                        .HasDefaultValue("~/images/no-image");
-
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
@@ -209,7 +191,7 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0a6a64cb-2847-47f0-a306-4923021fcc52"),
+                            Id = new Guid("b9ecd41c-0f17-4954-963f-04f55ee18117"),
                             Description = "In his fourth year at Hogwarts, Harry must reluctantly compete in an ancient wizard tournament after someone mysteriously selects his name, while the Dark Lord secretly conspires something sinister.",
                             Director = "Mike Newel",
                             Duration = 157,
@@ -219,7 +201,7 @@ namespace CinemaApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b0aa45d9-07a4-4875-987e-85583b6b38e9"),
+                            Id = new Guid("c556313d-5e26-4552-9b72-fc28447c2a61"),
                             Description = "Among motion pictures of Middle-earth in various formats, The Lord of the Rings is a trilogy of epic fantasy adventure films directed by Peter Jackson, based on the novel The Lord of the Rings by British author J. R. R. Tolkien.",
                             Director = "Peter Jackson",
                             Duration = 178,
@@ -308,10 +290,12 @@ namespace CinemaApp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -347,10 +331,12 @@ namespace CinemaApp.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -358,25 +344,6 @@ namespace CinemaApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("CinemaApp.Data.Models.ApplicationUserMovie", b =>
-                {
-                    b.HasOne("CinemaApp.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("ApplicationUserMovies")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CinemaApp.Data.Models.Movie", "Movie")
-                        .WithMany("MovieApplicationUsers")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaApp.Data.Models.CinemaMovie", b =>
@@ -449,11 +416,6 @@ namespace CinemaApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CinemaApp.Data.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("ApplicationUserMovies");
-                });
-
             modelBuilder.Entity("CinemaApp.Data.Models.Cinema", b =>
                 {
                     b.Navigation("CinemaMovies");
@@ -461,8 +423,6 @@ namespace CinemaApp.Data.Migrations
 
             modelBuilder.Entity("CinemaApp.Data.Models.Movie", b =>
                 {
-                    b.Navigation("MovieApplicationUsers");
-
                     b.Navigation("MoviesCinema");
                 });
 #pragma warning restore 612, 618

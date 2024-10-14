@@ -15,6 +15,8 @@
 			public const int DescriptionNameMinLength = 50;
 			public const int DescriptionNameMaxLength = 500;
 			public const string ReleaseDateFormat = "MMMM yyyy";
+			public const int ImageUrlMinLength = 3;
+			public const int ImageUrlMaxLength = 2083;
 		}
 
 		public static class Cinema

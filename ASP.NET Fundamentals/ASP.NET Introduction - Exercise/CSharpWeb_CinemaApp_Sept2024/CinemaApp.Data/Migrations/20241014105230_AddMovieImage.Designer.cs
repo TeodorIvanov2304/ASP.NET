@@ -4,6 +4,7 @@ using CinemaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Data.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241014105230_AddMovieImage")]
+    partial class AddMovieImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,7 @@ namespace CinemaApp.Data.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("UserMovies");
+                    b.ToTable("ApplicationUserMovie");
                 });
 
             modelBuilder.Entity("CinemaApp.Data.Models.Cinema", b =>
@@ -126,19 +129,19 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a6e282b3-f06e-4076-98aa-b6340af60d83"),
+                            Id = new Guid("06907400-0458-445d-9a5f-1b711fc91995"),
                             Location = "Sofia",
                             Name = "Cinema city"
                         },
                         new
                         {
-                            Id = new Guid("9e186d46-26a8-46f6-b048-066c0bf4c68f"),
+                            Id = new Guid("c6499f21-7d18-4ddb-91b0-63ff663becb0"),
                             Location = "Plovdiv",
                             Name = "Cinema city"
                         },
                         new
                         {
-                            Id = new Guid("dc08b440-fbbe-449e-954c-7b0e0bbb08ff"),
+                            Id = new Guid("1e4e7f49-51ea-488c-825d-81bd6b3b8526"),
                             Location = "Varna",
                             Name = "Cinemax"
                         });
@@ -209,7 +212,7 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0a6a64cb-2847-47f0-a306-4923021fcc52"),
+                            Id = new Guid("4223f8f4-4c80-44e5-b771-17afb4e35e9f"),
                             Description = "In his fourth year at Hogwarts, Harry must reluctantly compete in an ancient wizard tournament after someone mysteriously selects his name, while the Dark Lord secretly conspires something sinister.",
                             Director = "Mike Newel",
                             Duration = 157,
@@ -219,7 +222,7 @@ namespace CinemaApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b0aa45d9-07a4-4875-987e-85583b6b38e9"),
+                            Id = new Guid("0115b257-64ca-4d1f-9464-91d6da6d5298"),
                             Description = "Among motion pictures of Middle-earth in various formats, The Lord of the Rings is a trilogy of epic fantasy adventure films directed by Peter Jackson, based on the novel The Lord of the Rings by British author J. R. R. Tolkien.",
                             Director = "Peter Jackson",
                             Duration = 178,

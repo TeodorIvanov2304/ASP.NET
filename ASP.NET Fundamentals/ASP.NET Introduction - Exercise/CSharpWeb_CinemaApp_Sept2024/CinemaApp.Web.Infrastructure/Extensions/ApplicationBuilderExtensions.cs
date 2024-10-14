@@ -9,7 +9,7 @@ namespace CinemaApp.Web.Infrastructure.Extensions
 	{
 		public static async Task<IApplicationBuilder> ApplyMigrations(this IApplicationBuilder app)
 		{
-			using IServiceScope serviceScope =  app.ApplicationServices.CreateAsyncScope(); 
+			using IServiceScope serviceScope =   app.ApplicationServices.CreateAsyncScope(); 
 
 			CinemaDbContext dbContext =  serviceScope.ServiceProvider.GetRequiredService<CinemaDbContext>()!;
 
